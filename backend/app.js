@@ -3,9 +3,16 @@ const cors = require("cors")
 const cookieParser = require("cookie-parser")
 const sqlite = require("sqlite")
 // 创建socket.io连接
-const http = require("http")
+var fs = require("fs")
+const https = require("https")
+
 const app = express()
-const server = http.createServer(app)
+const server = https.createServer({
+key:fs.readFileSync("/home/ubuntu/xhwm.me/xhwm.me.key"),
+cert:fs.readFileSync("/home/ubuntu/xhwm.me/xhwm.me.cer")
+},app)
+
+
 const io = require("socket.io")
 const ioServer = io(server)
 global.ioServer = ioServer
